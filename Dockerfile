@@ -1,15 +1,13 @@
 FROM tensorflow/tensorflow
 
 RUN apt-get update
-RUN apt install -y git-all
-
-RUN pip install tensorflow-hub\
-pip install tensorflow_text\
-pip install flask 
-
-WORKDIR /serving
+RUN apt-get install -y git-all
+RUN pip install --upgrade pip
+RUN pip install tensorflow-hub
+RUN pip install tensorflow_text
+RUN pip install flask
 
 COPY app.py app.py
 COPY templates templates
 
-ENTRYPOINT ["python app.py"]
+ENTRYPOINT ["python", "app.py"]

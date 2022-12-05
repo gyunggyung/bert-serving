@@ -1,6 +1,7 @@
 # bert-serving
 ```
-python app.py
+docker build -t bert-serving ./bert-serving
+docker run -it --rm -p 8000:8000 bert-serving
 ```
 
 ## Reference

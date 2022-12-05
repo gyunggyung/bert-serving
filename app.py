@@ -29,8 +29,5 @@ def classify():
     score = tf.tensordot(embeddings1, embeddings2, axes=[1, 1]).numpy()[0][0]
     return "<h3>두 문장의 유사도는: {}%입니다!</h3".format(round(score * 100, 2))
 
-
-host_addr = "0.0.0.0"
-port_num = "8888"
 if __name__ == '__main__':
-    app.run(host=host_addr, port=port_num, debug=True)
+    app.run(host="0.0.0.0", port="8000", debug=True)
