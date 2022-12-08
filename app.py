@@ -1,18 +1,9 @@
 import tensorflow as tf
-import tensorflow_hub as hub
 import tensorflow_text
 from flask import Flask, request, render_template
 from cachelib  import SimpleCache
 
-encoder = hub.KerasLayer("https://tfhub.dev/jeongukjae/distilkobert_sentence_encoder/1")
-preprocessor = hub.KerasLayer("https://tfhub.dev/jeongukjae/distilkobert_cased_preprocess/1")
-
-inputs = tf.keras.Input([], dtype=tf.string)
-encoder_inputs = preprocessor(inputs)
-sentence_embedding = encoder(encoder_inputs)
-normalized_sentence_embedding = tf.nn.l2_normalize(sentence_embedding, axis=-1)
-model = tf.keras.Model(inputs, normalized_sentence_embedding)
-
+model = tf.saved_model.load("model/distilkobert_sentence_encoder")
 cache = SimpleCache()
 app = Flask(__name__)
 
@@ -36,4 +27,4 @@ def classify():
     return "<h3>두 문장의 유사도는: {}%입니다!</h3".format(round(score * 100, 2))
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port="8000", debug=True)
+    app.run(host="0.0.0.0", port="8888", debug=True)
