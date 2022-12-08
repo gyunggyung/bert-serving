@@ -27,4 +27,4 @@ def classify():
     return "<h3>두 문장의 유사도는: {}%입니다!</h3".format(round(score * 100, 2))
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port="8888", debug=True)
+    app.run(host="0.0.0.0", port="8000", debug=True)
